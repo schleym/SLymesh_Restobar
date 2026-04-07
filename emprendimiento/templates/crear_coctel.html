@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Crea tu Cóctel{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero-coctel">
+    <div class="hero-content">
+        <h1>🍸 Diseña tu Cóctel Perfecto</h1>
+        <p>Combina sabores, crea algo único y agrégalo a tu pedido</p>
+
+        <button id="abrir-modal" class="btn-hero">
+            Crear ahora
+        </button>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-coctel">
+
+    <div class="feature-card">
+        <h3>🥃 Elige tu base</h3>
+        <p>Ron, Pisco, Cachaça</p>
+    </div>
+
+    <div class="feature-card">
+        <h3>🍓 Personaliza sabor</h3>
+        <p>Frutal, cítrico o dulce</p>
+    </div>
+
+    <div class="feature-card">
+        <h3>✨ Resultado único</h3>
+        <p>Tu cóctel hecho a medida</p>
+    </div>
+
+</section>
+
+<!-- MODAL -->
+<div id="modal-coctel" class="modal-coctel d-none">
+    <div id="preview-coctel-bg">
+        <div class="modal-overlay"></div>
+
+        <div class="modal-contenido">
+
+            <button id="cerrar-modal" class="cerrar-modal">✖</button>
+
+            <h2>🍸 Crea tu Cóctel</h2>
+
+            <div id="form-coctel">
+                <h5>1. Elige tu Base</h5>
+                <div class="opciones" id="base">
+                    <div class="opcion" data-value="Ron">🥃 Ron</div>
+                    <div class="opcion" data-value="Pisco">🍸 Pisco</div>
+                    <div class="opcion" data-value="Cachaza">🌵 Cachaça</div>
+                </div>
+
+                <h5>2. Selecciona el Sabor</h5>
+                <div class="opciones" id="sabor">
+                    <div class="opcion" data-value="Frutal">🍓 Frutal</div>
+                    <div class="opcion" data-value="Cítrico">🍋 Cítrico</div>
+                    <div class="opcion" data-value="Dulce">🍯 Dulce</div>
+                </div>
+
+                <div id="detalle-sabor" class="detalle-sabor d-none">
+                    <h5>¿Qué ingrediente destaca?</h5>
+                    <select id="ingrediente" class="form-select mb-2"></select>
+                </div>
+
+                <h5>3. ❄️ Estilo de servicio</h5>
+                <div class="opciones grupo" data-grupo="estilo">
+                    <div class="opcion" data-value="En las rocas">❄️ En las rocas</div>
+                    <div class="opcion" data-value="Frappé">🧊 Frappé</div>
+                    <div class="opcion" data-value="Frozen">🥶 Frozen</div>
+                    <div class="opcion" data-value="Refrescante">🍹 Ligero</div>
+                </div>
+
+                <h5>4. 🍬 Nivel de dulzor</h5>
+                <div class="opciones grupo" data-grupo="dulzor">
+                    <div class="opcion" data-value="Bajo">🍋 Bajo</div>
+                    <div class="opcion" data-value="Medio">🍯 Medio</div>
+                    <div class="opcion" data-value="Alto">🍭 Alto</div>
+                </div>
+
+                <h5>5. 🥤 Tamaño</h5>
+                <div class="opciones grupo" data-grupo="tamano">
+                    <div class="opcion" data-value="500">🥤 500cc</div>
+                    <div class="opcion" data-value="1000">🍹 1 Litro</div>
+                </div>
+            </div>
+            <div id="mixing-area" class="mixing-area d-none">
+                <div id="shaker" class="shaker-container">
+                    <div id="liquid" class="liquid"></div>
+                    <div id="particles-container" class="particles"></div>
+                </div>
+                <div id="mixing-status" class="mixing-status">Preparando...</div>
+            </div>
+
+
+            <button class="btn-generar" id="generar">
+                ¡Crear Mi Cóctel! ✨
+            </button>
+
+            <div id="resultado" class="resultado-coctel d-none">
+                <h2 id="nombre"></h2>
+                <p id="descripcion"></p>
+                <h4 id="precio" style="color: #f5c542;"></h4>
+                <div class="acciones-finales">
+                    <button onclick="compartirInstagram()" class="btn-instagram">
+                        <span>📸 Compartir en Instagram</span>
+                    </button>
+                </div>
+
+                <button onclick="cerrarYResetearModal()" class="btn-hero"
+                    style="margin-top: 20px; width: 100%; font-size: 0.8rem; padding: 10px;">
+                    Crear otro
+                </button>
+            </div>
+            <div id="toast" class="toast-personalizado d-none">
+            </div>
+
+        </div>
+    </div>
+    {% endblock %}

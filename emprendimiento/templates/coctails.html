@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Slymesh - Premium Cocktails {% endblock %}
+
+{% block content %}
+<div class="premium-cocktail-view">
+
+    <section class="hero-section">
+        <h1 class="hero-title">Cocktails</h1>
+        <p class="hero-subtitle">COCTELES TRADICIONALES</p>
+    </section>
+
+    <div class="menu-container">
+
+        {% for coctel in cocteles %}
+
+        <div class="cocktail-card {{ coctel.nombre|slugify }}">
+
+            <div class="card-img-wrapper">
+                {% if coctel.imagen_url %}
+                <img src="{{ coctel.imagen_url }}" alt="{{ coctel.nombre }}">
+                {% else %}
+                <img src="{% static 'img/default-cocktail.jpg' %}" alt="Cocktail">
+                {% endif %}
+            </div>
+
+            <div class="card-body">
+
+                <div class="card-header-group">
+                    <h3 class="card-title">{{ coctel.nombre }}</h3>
+                    <span class="card-price">${{ coctel.precio }}</span>
+                </div>
+
+                <p class="card-text">
+                    {{ coctel.descripcion|default:"Una experiencia única de sabor y frescura preparada al momento." }}
+                </p>
+
+                <div class="card-controls">
+                    <input type="number" class="quantity-input" min="1" value="1">
+
+                    <button class="add-to-cart"
+                            data-id="coctel-{{ coctel.id }}"
+                            data-nombre="{{ coctel.nombre }}"
+                            data-precio="{{ coctel.precio }}"
+                            data-tipo="coctel">
+                        Agregar
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}

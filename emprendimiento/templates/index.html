@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+
+{% block title %} Slymesh {% endblock %}
+
+{% block content %}
+
+<div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+    </div>
+
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="5000">
+            <div class="overlay"></div>
+            <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&q=80&w=1920" class="c-img" alt="Mojito">
+            <div class="carousel-caption">
+                <h2 class="animate__animated animate__fadeInDown">FRESCURA <span class="gold-text">TROPICAL</span></h2>
+                <p class="tracking-wider animate__animated animate__fadeInUp animate__delay-1s">Mojito con menta de huerto y ron añejo.</p>
+                <a href="#catalogo" class="btn-gold animate__animated animate__zoomIn animate__delay-2s">Ver Colección</a>
+            </div>
+        </div>
+
+        <div class="carousel-item" data-bs-interval="5000">
+            <div class="overlay"></div>
+            <img src="https://pbs.twimg.com/media/EQRTeHVWsAE-Fcu.jpg:large" class="c-img" alt="Piscola">
+            <div class="carousel-caption">
+                <h2 class="animate__animated animate__fadeInDown">TRADICIÓN <span class="gold-text">CHILENA</span></h2>
+                <p class="tracking-wider animate__animated animate__fadeInUp animate__delay-1s">Piscola 40° servida a la perfección.</p>
+                <a href="#catalogo" class="btn-gold animate__animated animate__zoomIn animate__delay-2s">Comprar Ahora</a>
+            </div>
+        </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+
+<section id="catalogo" class="section-dark">
+    <div class="container">
+        <div class="text-center mb-5 reveal">
+            <span class="section-subtitle">Descubre</span>
+            <h2 class="section-title">LOS <span class="gold-text">FAVORITOS</span></h2>
+            <div class="separator-gold"></div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4 reveal">
+                <div class="luxury-card">
+                    <div class="card-img-wrapper">
+                        <img src="https://media.revistagq.com/photos/5d3ae5d93b83c000083d27fb/16:9/w_5455,h_3068,c_limit/iStock-957164506.jpg" alt="Caipiriña">
+                    </div>
+                    <div class="card-body-luxury">
+                        <h4>Caipiriña</h4>
+                        <p>Refrescante caipiriña</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="price">$8.500</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 reveal">
+                <div class="luxury-card">
+                    <div class="card-img-wrapper">
+                        <img src="https://www.patrontequila.com/binaries/content/gallery/patrontequila/recipes/patron-silver/patr-n-mojito/hero.jpg" alt="Mojito">
+                    </div>
+                    <div class="card-body-luxury">
+                        <h4>Mojito</h4>
+                        <p>Menta, Ron y Gaseosa</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="price">$8.500</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 reveal">
+                <div class="luxury-card">
+                    <div class="card-img-wrapper">
+                        <img src="https://tiaclara.com/wp-content/uploads/2023/08/pina-colada-DSC8574.jpg" alt="Piña colada">
+                    </div>
+                    <div class="card-body-luxury">
+                        <h4>Piña colada</h4>
+                        <p>Una mezcla exquisita entre Ron, Escencia de coco y crema de leche.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="price">$8.500</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-5 reveal">
+             <a href="{% url 'tragos' %}" class="btn-gold">Ver Carta Completa</a>
+        </div>
+    </div>
+</section>
+
+<section class="about-section reveal">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="about-img-box">
+                    <img src="https://images.unsplash.com/photo-1574096079513-d8259312b785?q=80&w=800" alt="Bartender" class="img-fluid main-img">
+                    <div class="border-box"></div>
+                </div>
+            </div>
+            <div class="col-lg-6 ps-lg-5">
+                <span class="section-subtitle">El gran secreto</span>
+                <h2 class="gold-text">RECETA DE RESTAURANT, <br><span class="gold-text">PRECIO DE HOGAR</span></h2>
+                <p class="mb-4">
+                    Se han adaptado las cantidades y los precios para conveniencia de todos, siguiendo la receta de restaurantes a la hora de la preparación de cocteles.
+                </p>
+                <ul class="luxury-list">
+                    <li><i class="fas fa-check"></i> Desarrollados en el hogar.</li>
+                    <li><i class="fas fa-check"></i> Delivery dentro de linares.</li>
+                    <li><i class="fas fa-check"></i> Entrega lo antes posible.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-banner reveal">
+    <div class="container">
+        <h2 class="gold-text mb-3">¿Listo para el fin de semana?</h2>
+        <p>Agenda tu pedido con anticipación.</p>
+        <a href="https://wa.me/56987829955"
+   rel="noopener noreferrer" target="_blank" class="btn-gold">Pedir por WhatsApp</a>
+    </div>
+</section>
+
+<script>
+    window.addEventListener('scroll', reveal);
+    function reveal(){
+      var reveals = document.querySelectorAll('.reveal');
+      for(var i = 0; i < reveals.length; i++){
+        var windowheight = window.innerHeight;
+        var revealtop = reveals[i].getBoundingClientRect().top;
+        var revealpoint = 150;
+        if(revealtop < windowheight - revealpoint){
+          reveals[i].classList.add('active');
+        }
+      }
+    }
+</script>
+
+{% endblock %}

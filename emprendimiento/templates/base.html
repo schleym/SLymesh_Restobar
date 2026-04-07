@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Slymesh{% endblock %}</title>
+    <link rel="icon" type="image/svg+xml" href="{% static 'favicon.svg' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/stylesbase.css' %}">
+    <link rel="stylesheet" href="{% static 'css/coctails.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mocktails.css' %}">
+    <link rel="stylesheet" href="{% static 'css/crear_coctel.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <button class="mobile-toggle d-md-none" id="mobile-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">SLYMESH</div>
+            <button id="toggle-btn" class="toggle-btn">
+                <i class="fas fa-chevron-left" id="toggle-icon"></i>
+            </button>
+        </div>
+
+        <ul class="nav-links">
+            <li>
+                <a href="{% url 'index' %}">
+                    <i class="fas fa-home"></i>
+                    <span class="link-text">Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'tragos' %}">
+                    <i class="fas fa-cocktail"></i>
+                    <span class="link-text">Coctelería</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'mocktails' %}">
+                    <i class="fas fa-glass-martini-alt"></i>
+                    <span class="link-text">MockTails</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'crear_coctel' %}">
+                    <i class="">🍸</i>
+                    <span class="link-text">Crea tu coctel</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <button class="custom-dropdown-btn w-100" id="contactToggle">
+                    <i class="fas fa-envelope"></i>
+                    <span class="link-text">Contacto</span>
+                    <i class="fas fa-chevron-down ms-auto"></i>
+                </button>
+
+                <ul class="sidebar-submenu" id="contactMenu">
+                    <li>
+                        <a href="https://wa.me/56987829955" rel="noopener noreferrer" target="_blank"><i
+                                class="fab fa-whatsapp"></i>
+                            WhatsApp</a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/slymesh.linares?igsh=MW55eXphN2F6bzRkNA==" target="_blank"><i class="fab fa-instagram"></i>
+                            Instagram</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <button id="btn-carrito" class="carrito-fab">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="link-text">Mi Pedido</span>
+            <span id="carrito-count">0</span>
+        </button>
+
+        <div id="carrito-modal" class="carrito-modal hidden">
+            <div class="carrito-content animate__animated animate__fadeInUp">
+                <h3><i class="fas fa-cocktail"></i> Tu Pedido</h3>
+
+                <div id="carrito-items">
+                </div>
+
+                <div class="carrito-total-wrapper">
+                    <span>Total:</span>
+                    <span>$<span id="carrito-total">0</span></span>
+                </div>
+
+                <div class="carrito-form">
+                    <input type="text" id="nombreCliente" placeholder="👤 Nombre Completo">
+                    <input type="tel" id="telefonoCliente" placeholder="📱 Ej: 9 1234 5678">
+                    <input type="text" id="direccionCliente" placeholder="📍 Dirección y Número">
+                </div>
+
+                <button id="btn-whatsapp" class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Enviar Pedido
+                </button>
+
+                <button id="cerrar-carrito" class="btn-close-cart">
+                    Añadir más / Cerrar
+                </button>
+            </div>
+        </div>
+
+        <div class="sidebar-footer">
+            <span class="footer-text">© 2026 Slymesh</span>
+        </div>
+    </nav>
+
+    <main class="main-content" id="main-content">
+        <div class="container-fluid">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'scripts/script.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static 'scripts/crearCoctel.js' %}"></script>
+
+</body>
+
+</html>

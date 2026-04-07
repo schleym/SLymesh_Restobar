@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <h1>Premium Mocktails</h1>
+    {% for mocktail in mocktails %}
+    <div class="row-section">
+
+        <div class="image-box">
+            <img src="{{ mocktail.imagen_url }}"
+                 alt="{{ mocktail.nombre_mocktail }}">
+        </div>
+
+        <div class="content-box">
+            <h2>{{ mocktail.nombre_mocktail }}</h2>
+            <p>{{ mocktail.descripcion }}</p>
+
+            <button class="btn-fresh add-to-cart"
+                    data-id="mocktail-{{ mocktail.id }}"
+                    data-nombre="{{ mocktail.nombre_mocktail }}"
+                    data-precio="{{ mocktail.precio }}"
+                    data-tipo="mocktail">
+                Agregar · ${{ mocktail.precio }}
+            </button>
+        </div>
+
+    </div>
+    {% empty %}
+        <p>No hay mocktails disponibles actualmente.</p>
+    {% endfor %}
+
+</div>
+
+{% endblock %}
