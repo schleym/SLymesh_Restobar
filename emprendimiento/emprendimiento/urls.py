@@ -19,6 +19,7 @@ from django.urls import path
 from control import views
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('',views.index, name="index"),
     path("tragos/", views.tragos, name="tragos"),
     path('mocktails/', views.mocktails, name='mocktails'),
