@@ -1,0 +1,651 @@
+/* HERO */
+.hero-coctel {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    /* Fondo base */
+    background-color: #000;
+}
+
+.hero-coctel::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 30%, rgba(245, 197, 66, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 70% 60%, rgba(212, 160, 23, 0.1) 0%, transparent 40%);
+    animation: moveLight 15s infinite alternate;
+    z-index: 1;
+}
+
+.hero-coctel::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
+    opacity: 0.15; /* Muy suave */
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content h1 {
+    color: #f5c542;
+    font-size: 56px; /* Un poco más grande */
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    /* Brillo dorado */
+    text-shadow: 0 0 20px rgba(245, 197, 66, 0.4), 
+                 0 0 40px rgba(245, 197, 66, 0.2);
+}
+
+.hero-content p {
+    color: #aaa;
+    margin-bottom: 20px;
+}
+
+.btn-hero {
+    padding: 14px 30px;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(135deg, #f5c542, #d4a017);
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-hero:hover {
+    transform: scale(1.1);
+}
+
+/* FEATURES */
+.features-coctel {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px;
+    flex-wrap: wrap;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.03); /* Fondo casi invisible */
+    backdrop-filter: blur(10px); /* Desenfoque de fondo */
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde suave */
+    padding: 30px;
+    border-radius: 20px;
+    width: 250px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    background: rgba(245, 197, 66, 0.05);
+    border: 1px solid rgba(245, 197, 66, 0.5); /* El borde se ilumina al pasar el mouse */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 
+                0 0 15px rgba(245, 197, 66, 0.2);
+}
+
+/* =========================
+   MODAL (FIX PRINCIPAL)
+========================= */
+
+.modal-coctel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 999;
+}
+
+.modal-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1;
+}
+
+.modal-contenido {
+    position: relative;
+    width: 90%;
+    max-width: 600px;
+
+    max-height: 85vh;
+    /* 🔥 evita que se salga */
+    overflow-y: auto;
+    /* 🔥 SOLUCIÓN CLAVE */
+
+    background: linear-gradient(145deg, #0d0d0d, #1a1a1a);
+    padding: 30px;
+    border-radius: 20px;
+
+    z-index: 2;
+
+    animation: modalIn 0.4s ease;
+}
+
+/* Scroll bonito */
+.modal-contenido::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-contenido::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 10px;
+}
+
+/* BOTÓN CERRAR */
+.cerrar-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 3;
+}
+
+/* OPCIONES */
+.opciones {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.opcion {
+    flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    background: #1f1f1f;
+    color: #ddd;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.opcion:hover {
+    background: #2a2a2a;
+}
+
+.opcion.activa {
+    background: #f5c542;
+    color: #111;
+}
+
+/* DETALLE */
+.detalle-sabor {
+    margin-top: 15px;
+    padding: 15px;
+    background: #181818;
+    border-radius: 10px;
+}
+
+/* 🔥 INPUTS Y SELECTS MEJORADOS */
+.detalle-sabor select,
+.detalle-sabor input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+
+    background: #1f1f1f;
+    border: 1px solid #333;
+    color: white;
+    border-radius: 8px;
+
+    position: relative;
+    z-index: 2;
+    /* evita conflictos visuales */
+}
+
+/* 🔥 evita que el select rompa layout */
+.detalle-sabor select {
+    cursor: pointer;
+}
+
+.detalle-sabor input::placeholder {
+    color: #777;
+}
+
+/* =========================
+   BOTÓN GENERAR (FIX)
+========================= */
+
+.btn-generar {
+    margin-top: 20px;
+    width: 100%;
+    padding: 14px;
+
+    border-radius: 12px;
+    background: linear-gradient(135deg, #f5c542, #d4a017);
+    border: none;
+
+    cursor: pointer;
+
+    position: relative;
+    z-index: 2;
+    /* 🔥 importante */
+}
+
+/* BOTÓN EN PROCESO */
+.btn-generar.loading {
+    opacity: 0.7;
+    pointer-events: none;
+    transform: scale(0.98);
+}
+
+.btn-generar:hover {
+    transform: scale(1.03);
+}
+
+.resultado-coctel {
+    text-align: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    border: 1px solid rgba(245, 197, 66, 0.3);
+    animation: fadeIn 0.8s ease;
+    /* Una entrada suave */
+}
+
+.resultado-coctel h2 {
+    font-size: 2rem;
+    color: #f5c542;
+    text-shadow: 0 0 10px rgba(245, 197, 66, 0.5);
+    margin-bottom: 10px;
+}
+
+.resultado-coctel p {
+    color: #ccc;
+}
+
+.resultado-coctel h4 {
+    margin-top: 10px;
+}
+
+#unidad:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: #2a2a2a;
+    border-color: #444;
+}
+
+/* Estilo Base del Toast */
+.toast-personalizado {
+    position: fixed;
+    top: 20px;
+    right: -350px;
+    /* Empieza fuera de la pantalla */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    /* Efecto cristal */
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 16px 24px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    z-index: 10000;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    min-width: 280px;
+}
+
+/* Cuando se muestra */
+.toast-personalizado.show {
+    right: 20px;
+}
+
+/* Contenido interno */
+.toast-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.toast-icon {
+    font-size: 28px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.toast-text strong {
+    display: block;
+    font-size: 1.1rem;
+    color: #00d2ff;
+    /* Un azul cian brillante */
+}
+
+.toast-text p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Auxiliar para ocultar */
+.d-none {
+    display: none !important;
+}
+
+/* =========================
+   ANIMACIONES
+========================= */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes modalIn {
+    from {
+        opacity: 0;
+        transform: translateY(-40px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* =========================
+   📱 MOBILE FIRST
+========================= */
+
+@media (max-width: 768px) {
+
+    .hero-coctel {
+        height: auto;
+        padding: 60px 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 28px;
+    }
+
+    .hero-content p {
+        font-size: 14px;
+    }
+
+    .btn-hero {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .features-coctel {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .feature-card {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .modal-contenido {
+        width: 95%;
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .opciones {
+        flex-direction: column;
+    }
+
+    .opcion {
+        width: 100%;
+    }
+
+    .btn-generar {
+        font-size: 16px;
+    }
+
+    .toast-personalizado {
+        right: 10px;
+        left: 10px;
+        min-width: auto;
+    }
+}
+
+/* --- AGREGAR ESTO AL FINAL DE TU CSS EXISTENTE --- */
+
+/* Contenedor de la animación de mezcla */
+.mixing-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    margin-bottom: 20px;
+}
+
+/* El Vaso Mezclador */
+.shaker-container {
+    position: relative;
+    width: 80px;
+    height: 120px;
+    border: 4px solid #fff;
+    border-top: none;
+    border-radius: 0 0 15px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    /* Importante para el llenado */
+    box-shadow: 0 0 15px rgba(245, 197, 66, 0.3);
+}
+
+/* Tapa del shaker (opcional, para más realismo) */
+.shaker-container::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 15px;
+    background: #ccc;
+    border-radius: 5px 5px 0 0;
+}
+
+/* El líquido interior */
+.liquid {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    /* Empieza vacío */
+    background: linear-gradient(to bottom, #f5c542, #ff8c00);
+    /* Color por defecto */
+    border-radius: 0 0 10px 10px;
+    transition: height 0.5s ease-out, background 0.3s ease;
+}
+
+/* Animación de Shaker (Agitar) */
+@keyframes shake-shaker {
+    0% {
+        transform: rotate(0deg) translate(0, 0);
+    }
+
+    25% {
+        transform: rotate(10deg) translate(5px, -5px);
+    }
+
+    50% {
+        transform: rotate(-10deg) translate(-5px, 5px);
+    }
+
+    75% {
+        transform: rotate(10deg) translate(5px, 5px);
+    }
+
+    100% {
+        transform: rotate(0deg) translate(0, 0);
+    }
+}
+
+.shaking {
+    animation: shake-shaker 0.3s ease-in-out infinite;
+}
+
+/* Partículas / Hielo / Burbujas */
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    opacity: 0;
+}
+
+@keyframes particle-float {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100px) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* Efecto de Destello Final (Victoria) */
+.confetti-burst {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+}
+
+@keyframes burst {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(15);
+        opacity: 0;
+    }
+}
+
+.animate-burst {
+    animation: burst 0.6s ease-out forwards;
+}
+
+/* Texto de estado */
+.mixing-status {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #aaa;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Helper para ocultar secciones del modal durante la animación */
+.hidden-step {
+    display: none !important;
+}
+
+/* Tu animación shake existente, asegúrate de que esté o úsala */
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translateX(-5px);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translateX(5px);
+    }
+}
+
+.shake {
+    animation: shake 0.5s;
+}
+
+.btn-instagram {
+    margin-top: 15px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.btn-instagram:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(188, 24, 136, 0.4);
+}
+
+.acciones-finales {
+    margin-top: 25px;
+}
+
+@keyframes moveLight {
+    from { transform: translate(-10%, -10%); }
+    to { transform: translate(10%, 10%); }
+}
