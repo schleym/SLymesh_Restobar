@@ -46,10 +46,15 @@ body {
   left: 0;
   width: 260px;
   height: 100vh;
-  background-color: var(--primary-dark);
-  /* 🔥 CLAVE */
-  transition: all 0.3s ease;
-  z-index: 1000;
+  background: rgba(15, 15, 15, 0.9); /* Deeper, more premium dark */
+  backdrop-filter: blur(20px); 
+  -webkit-backdrop-filter: blur(20px);
+  border-right: 1px solid rgba(255, 255, 255, 0.03);
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column; /* To anchor footer at bottom */
+  padding: 20px 0;
 }
 
 
@@ -61,56 +66,64 @@ body {
 /* --- HEADER --- */
 .sidebar-header {
   display: flex;
+  flex-direction: column; /* Stack vertically for centering */
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 40px;
-  padding: 0 5px;
-  /* Ajustado para alinear con el borde */
-  white-space: nowrap;
-  min-height: 45px;
-  /* Altura mínima para alinear con el botón externo */
+  justify-content: center;
+  padding: 30px 15px 15px; /* Added top margin (30px) and bottom padding */
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Thin separation bar */
+  position: relative; /* For absolute positioning of toggle btn */
 }
 
 .logo {
-  font-size: 22px;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 800;
   color: var(--white);
   text-transform: uppercase;
-  letter-spacing: 2px;
-  background: linear-gradient(45deg, var(--white), var(--accent-gold));
+  letter-spacing: 4px; /* Increased tracking for elegance */
+  background: linear-gradient(135deg, #fff 0%, var(--accent-gold) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
 /* Botón interno (Flecha) */
 .toggle-btn {
-  background: none;
-  border: none;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: var(--accent-gold);
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   cursor: pointer;
-  padding: 8px;
-  border-radius: 5px;
-  transition: background 0.3s;
+  border-radius: 8px; /* Squared with slight rounding for "Pro" look */
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Aseguramos que sea fácil de tocar en celular */
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  right: 15px;
+  top: 15px; /* Moved away from the centered title */
+  z-index: 10;
 }
 
 .toggle-btn:hover {
   background: rgba(197, 160, 89, 0.1);
+  border-color: var(--accent-gold);
+  color: #fff;
+  transform: translateY(-2px);
 }
+
+
 
 /* --- LINKS Y RESTO DEL ESTILO --- */
 .nav-links {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   width: 100%;
+  padding: 0 15px;
   flex-grow: 1;
 }
 
@@ -133,16 +146,23 @@ body {
 
 .nav-links i,
 .custom-dropdown-btn i {
-  font-size: 18px;
-  min-width: 30px;
-  text-align: center;
-  margin-right: 15px;
+  font-size: 20px;
+  min-width: 35px;
+  text-align: left;
+  margin-right: 10px;
+  color: var(--accent-gold);
+  transition: transform 0.3s ease;
 }
 
 .nav-links a:hover,
 .custom-dropdown-btn:hover {
-  background-color: rgba(197, 160, 89, 0.15);
-  color: var(--accent-gold);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--white);
+  transform: translateX(8px);
+}
+
+.nav-links a:hover i {
+  transform: scale(1.1);
 }
 
 .link-text {
@@ -160,7 +180,8 @@ body {
 
 .sidebar-footer {
   text-align: center;
-  padding-top: 20px;
+  padding: 20px;
+  margin-top: auto;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -206,15 +227,19 @@ body {
   }
 
   .sidebar.collapsed .toggle-btn {
-    margin: 0 auto;
-    margin-top: 20px;
-    width: 45px;
-    height: 45px;
+    position: relative; /* Override header absolute positioning */
+    right: auto;
+    top: auto;
+    margin: 20px auto 30px; /* Centered with bottom breathing room */
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    width: 40px;
+    height: 40px;
   }
 
-  /* Rotar la flecha en escritorio al colapsar */
+  /* Rotar la flecha en escritorio al colapsar - ELIMINADO POR CONFLICTO CON JS */
   .sidebar.collapsed #toggle-icon {
-    transform: rotate(180deg);
+    transform: none;
   }
 
   /* Ajuste visual de los enlaces (ahora parecen botones) */

@@ -339,6 +339,17 @@ document.getElementById("cerrar-modal").onclick = cerrarYResetearModal;
 
 document.querySelector(".modal-overlay").onclick = cerrarYResetearModal;
 
+// BOTÓN IR AL CARRITO (Desde Resultado)
+document.getElementById("btn-ir-al-carrito").onclick = () => {
+    // 1. Cerrar y resetear modal de coctel
+    cerrarYResetearModal();
+    // 2. Abrir el modal del carrito (usando el toggle o clase hidden)
+    const carritoModal = document.getElementById("carrito-modal");
+    if (carritoModal) {
+        carritoModal.classList.remove("hidden");
+    }
+}
+
 function compartirInstagram() {
     // 1. Extraemos los datos actuales del cóctel creado
     const nombreCoctel = document.getElementById("nombre").textContent;

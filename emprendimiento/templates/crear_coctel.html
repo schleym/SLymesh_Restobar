@@ -141,19 +141,29 @@
 
 
             <div id="resultado" class="resultado-coctel d-none">
+                <div class="success-icon">✨</div>
                 <h2 id="nombre"></h2>
                 <p id="descripcion"></p>
-                <h4 id="precio" style="color: #f5c542;"></h4>
-                <div class="acciones-finales">
-                    <button onclick="compartirInstagram()" class="btn-instagram">
-                        <span>📸 Compartir en Instagram</span>
+                <div id="precio-tag" class="precio-tag">
+                    <span id="precio"></span>
+                </div>
+                
+                <div class="acciones-finales-grid">
+                    <button onclick="compartirInstagram()" class="btn-action btn-share">
+                        <i class="fab fa-instagram"></i>
+                        <span>Compartir</span>
+                    </button>
+
+                    <button id="btn-ir-al-carrito" class="btn-action btn-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Ir a Pedido</span>
+                    </button>
+
+                    <button onclick="cerrarYResetearModal()" class="btn-action btn-reset">
+                        <i class="fas fa-redo"></i>
+                        <span>Crear otro</span>
                     </button>
                 </div>
-
-                <button onclick="cerrarYResetearModal()" class="btn-hero"
-                    style="margin-top: 20px; width: 100%; font-size: 0.8rem; padding: 10px;">
-                    Crear otro
-                </button>
             </div>
             <div id="toast" class="toast-personalizado d-none">
             </div>

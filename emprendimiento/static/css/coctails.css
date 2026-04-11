@@ -49,10 +49,12 @@
 /* --- CARD --- */
 .cocktail-card {
   background: var(--card-bg);
-  border: 1px solid rgba(255, 255, 255, .05);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
+  border: 1px solid rgba(255, 255, 255, .1); /* Slightly more visible border */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, .4), 0 5px 15px rgba(0, 0, 0, .2); /* Layered softer shadow */
   transition: .5s ease;
   animation: fadeInUp .8s backwards;
+  border-radius: 12px; /* Added slight rounding for a modern look */
+  overflow: hidden;
 }
 
 .card-img-wrapper {
