@@ -323,7 +323,6 @@ body {
 
   .sidebar.collapsed {
     width: 260px;
-    /* desactiva collapsed */
   }
 
   .main-content {
