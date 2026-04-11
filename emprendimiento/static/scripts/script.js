@@ -100,7 +100,7 @@ document.addEventListener("click", (e) => {
     const btn = e.target.closest(".add-to-cart");
     if (!btn) return;
 
-    const contenedor = btn.closest(".product-card") || btn.parentElement;
+    const contenedor = btn.closest(".product-card") || btn.closest(".cocktail-card") || btn.closest(".card-controls") || btn.parentElement;
     const cantidadInput = contenedor.querySelector(".quantity-input");
     const cantidad = cantidadInput ? parseInt(cantidadInput.value, 10) : 1;
 
@@ -121,11 +121,21 @@ document.addEventListener("click", (e) => {
         });
     }
 
+    let precioFinal = btn.dataset.precio ? parseInt(btn.dataset.precio, 10) : 0;
+    let tipoFinal = btn.dataset.tipo || "Normal";
+
+    const sizeSelect = contenedor.querySelector(".size-select");
+    if (sizeSelect) {
+        const option = sizeSelect.options[sizeSelect.selectedIndex];
+        precioFinal = parseInt(option.dataset.precio, 10);
+        tipoFinal = option.value;
+    }
+
     const producto = {
         id: btn.dataset.id,
         nombre: btn.dataset.nombre,
-        precio: parseInt(btn.dataset.precio, 10),
-        tipo: btn.dataset.tipo || "Normal",
+        precio: precioFinal,
+        tipo: tipoFinal,
         cantidad: cantidad
     };
 

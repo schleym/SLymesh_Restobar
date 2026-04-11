@@ -29,23 +29,29 @@
 
                 <div class="card-header-group">
                     <h3 class="card-title">{{ coctel.nombre }}</h3>
-                    <span class="card-price">${{ coctel.precio }}</span>
+                    <span class="card-price">Desde $8.000</span>
                 </div>
 
                 <p class="card-text">
                     {{ coctel.descripcion|default:"Una experiencia única de sabor y frescura preparada al momento." }}
                 </p>
 
-                <div class="card-controls">
-                    <input type="number" class="quantity-input" min="1" value="1">
+                <div class="card-controls" style="flex-direction: column; gap: 10px;">
+                    <select class="size-select" style="width: 100%; border-radius: 8px; padding: 10px; background: var(--secondary-dark); color: var(--white); border: 1px solid rgba(197, 160, 89, 0.4); cursor: pointer; outline: none;">
+                        <option value="500ml" data-precio="8000">Tamaño XL (500ml) - $8.000</option>
+                        <option value="1 Litro" data-precio="11000">La Jarra (1 Litro) - $11.000</option>
+                    </select>
 
-                    <button class="add-to-cart"
-                            data-id="coctel-{{ coctel.id }}"
-                            data-nombre="{{ coctel.nombre }}"
-                            data-precio="{{ coctel.precio }}"
-                            data-tipo="coctel">
-                        Agregar
-                    </button>
+                    <div style="display: flex; gap: 10px; width: 100%;">
+                        <input type="number" class="quantity-input" min="1" value="1" style="width: 70px; background: var(--secondary-dark); border: 1px solid rgba(255,255,255,0.1); color: white; text-align: center; border-radius: 8px; outline: none;">
+                        <button class="add-to-cart"
+                                style="flex-grow: 1; border-radius: 8px; padding: 10px;"
+                                data-id="coctel-{{ coctel.id }}"
+                                data-nombre="{{ coctel.nombre }}"
+                                data-tipo="coctel">
+                            Añadir al Pedido
+                        </button>
+                    </div>
                 </div>
 
             </div>
