@@ -1,21 +1,15 @@
 let seleccion = {
     base: null,
+    mixer: null,
     sabor: null,
-    tamano: null,
-    estilo: null,
-    dulzor: null
-};
-
-const preciosBase = {
-    "Ron": 4000,
-    "Pisco": 4500,
-    "Cachaza": 5000
+    adornos: null,
+    tamano: null
 };
 
 const coloresLiquido = {
-    "Frutal": "linear-gradient(to bottom, #ff4e50, #f9d423)", // Rojo-Naranja
-    "Cítrico": "linear-gradient(to bottom, #56ab2f, #a8e063)", // Verde
-    "Dulce": "linear-gradient(to bottom, #e100ff, #7f00ff)"   // Rosa-Morado
+    "Concentrado Piña": "linear-gradient(to bottom, #f9d423, #ff4e50)",
+    "Concentrado Frutilla": "linear-gradient(to bottom, #ff4e50, #e100ff)",
+    "Sin Sabor Extra": "linear-gradient(to bottom, #56ab2f, #a8e063)"
 };
 
 const estadosMezcla = [
@@ -30,6 +24,94 @@ const nombresPro = [
     "Sunset", "Rush", "Tropical", "Flow", "Wave", "Gold", "Fuego"
 ];
 
+// =======================
+// WIZARD LOGIC
+// =======================
+let currentStep = 0;
+const totalSteps = 5;
+const stepKeys = ['base', 'mixer', 'sabor', 'adornos', 'tamano'];
+
+function updateWizard() {
+    document.querySelectorAll('.wizard-step').forEach((step, index) => {
+        if (index === currentStep) {
+            step.classList.remove('d-none');
+        } else {
+            step.classList.add('d-none');
+        }
+    });
+
+    const percentage = ((currentStep + 1) / totalSteps) * 100;
+    document.getElementById('progress-fill').style.width = `${percentage}%`;
+    document.getElementById('step-indicator').textContent = `Paso ${currentStep + 1} de ${totalSteps}`;
+
+    const btnAtras = document.getElementById('btn-atras');
+    const btnSiguiente = document.getElementById('btn-siguiente');
+    const btnGenerar = document.getElementById('generar');
+
+    if (currentStep === 0) btnAtras.classList.add('d-none');
+    else btnAtras.classList.remove('d-none');
+
+    if (currentStep === totalSteps - 1) {
+        btnSiguiente.classList.add('d-none');
+        btnGenerar.classList.remove('d-none');
+    } else {
+        btnSiguiente.classList.remove('d-none');
+        btnGenerar.classList.add('d-none');
+    }
+
+    checkStepValidation();
+}
+
+function checkStepValidation() {
+    const currentKey = stepKeys[currentStep];
+    const btnSiguiente = document.getElementById('btn-siguiente');
+    const btnGenerar = document.getElementById('generar');
+
+    if (seleccion[currentKey]) {
+        btnSiguiente.disabled = false;
+        btnSiguiente.style.opacity = "1";
+        btnGenerar.disabled = false;
+        btnGenerar.style.opacity = "1";
+    } else {
+        btnSiguiente.disabled = true;
+        btnSiguiente.style.opacity = "0.4";
+        btnGenerar.disabled = true;
+        btnGenerar.style.opacity = "0.4";
+    }
+}
+
+document.getElementById('btn-siguiente').addEventListener('click', () => {
+    if (currentStep < totalSteps - 1) {
+        currentStep++;
+        updateWizard();
+    }
+});
+
+document.getElementById('btn-atras').addEventListener('click', () => {
+    if (currentStep > 0) {
+        currentStep--;
+        updateWizard();
+    }
+});
+
+function updateSummary() {
+    const sumBox = document.getElementById('live-summary');
+    const sumText = document.getElementById('summary-text');
+    let parts = [];
+    if(seleccion.base) parts.push(seleccion.base);
+    if(seleccion.mixer) parts.push('+ ' + seleccion.mixer);
+    if(seleccion.sabor && seleccion.sabor !== "Sin Sabor Extra") parts.push('+ ' + seleccion.sabor);
+    if(seleccion.adornos && seleccion.adornos !== "Sin Adornos") parts.push('+ ' + seleccion.adornos);
+    if(seleccion.tamano) parts.push(`(${seleccion.tamano}cc)`);
+
+    if(parts.length > 0) {
+        sumBox.classList.remove('d-none');
+        sumText.textContent = parts.join(" ");
+    } else {
+        sumBox.classList.add('d-none');
+    }
+}
+
 const nombre = `${seleccion.base} ${nombresPro[Math.floor(Math.random() * nombresPro.length)]}`;
 
 const opcionesSabor = {
@@ -38,65 +120,27 @@ const opcionesSabor = {
     "Cítrico": ["Limón", "Naranja"]
 };
 
-// CLICK OPCIONES
-document.querySelectorAll(".opcion").forEach(op => {
+// CLICK OPCIONES (CARDS)
+document.querySelectorAll(".opcion-card").forEach(op => {
     op.addEventListener("click", () => {
-        const grupo = op.parentElement;
+        const grupo = op.closest(".opciones");
 
-        grupo.querySelectorAll(".opcion").forEach(o => o.classList.remove("activa"));
+        grupo.querySelectorAll(".opcion-card").forEach(o => o.classList.remove("activa"));
         op.classList.add("activa");
 
-        // Soporte para ID o data-grupo
-        const tipo = grupo.id || grupo.dataset.grupo;
-        if (!tipo) return; // Seguridad
+        const tipo = grupo.dataset.grupo;
+        if (!tipo) return; 
 
         seleccion[tipo] = op.dataset.value;
-
-        if (tipo === "sabor") {
-            cargarIngredientes(op.dataset.value);
-        }
+        checkStepValidation();
+        updateSummary();
     });
 });
 
-// INGREDIENTES
-function cargarIngredientes(sabor) {
-    const select = document.getElementById("ingrediente");
-    const contenedor = document.getElementById("detalle-sabor");
-
-    if (!select || !contenedor) return;
-
-    select.innerHTML = "";
-
-    const opcionesSabor = {
-        "Frutal": ["Mango", "Frambuesa"],
-        "Dulce": ["Azúcar", "Jarabe"],
-        "Cítrico": ["Limón", "Naranja"]
-    };
-
-    if (opcionesSabor[sabor]) {
-        opcionesSabor[sabor].forEach(i => {
-            const opt = document.createElement("option");
-            opt.value = i;
-            opt.textContent = i;
-            select.appendChild(opt);
-        });
-        contenedor.classList.remove("d-none");
-    } else {
-        contenedor.classList.add("d-none");
-    }
-}
 
 // BOTÓN GENERAR
 document.getElementById("generar").addEventListener("click", function () {
-
-    // VALIDACIÓN PREVIA
-    if (!seleccion.base || !seleccion.sabor || !seleccion.tamano) {
-        alert("Por favor, completa Base, Sabor y Tamaño para crear tu obra maestra.");
-        // Un pequeño shake de error en el botón
-        this.classList.add("shake");
-        setTimeout(() => this.classList.remove("shake"), 500);
-        return;
-    }
+    // (La validación ya está cubierta por el flujo del Wizard)
 
     const modalContenido = document.querySelector(".modal-contenido");
     const formCoctel = document.getElementById("form-coctel"); // Necesitamos envolver el form en el HTML
@@ -112,7 +156,7 @@ document.getElementById("generar").addEventListener("click", function () {
     mixingArea.classList.remove("d-none");
     this.classList.add("d-none"); // Ocultar botón generar
     liquid.style.height = "0";
-    liquid.style.background = coloresLiquido[seleccion.sabor] || coloresLiquido["Frutal"];
+    liquid.style.background = coloresLiquido[seleccion.sabor] || coloresLiquido["Sin Sabor Extra"];
     statusText.textContent = estadosMezcla[0];
 
 
@@ -202,35 +246,20 @@ function triggerBurst() {
 }
 
 function finalizarCreacionCoctel() {
-    const ingredienteExtra = document.getElementById("ingrediente")?.value || "Mix especial";
-    const nombreCoctel = `Slymesh ${seleccion.base} ${nombresPro[Math.floor(Math.random() * nombresPro.length)]}`;
+    const nombreCoctel = `Slymesh ${nombresPro[Math.floor(Math.random() * nombresPro.length)]}`;
 
     const descripcion = `
-    Cóctel ${seleccion.sabor.toLowerCase()} con base de ${seleccion.base}
-    , estilo ${seleccion.estilo || "refrescante"}
-    y nivel de dulzor ${seleccion.dulzor || "medio"}.
+    Cóctel base ${seleccion.base}, mezclado con ${seleccion.mixer.toLowerCase()}, toque de ${seleccion.sabor.toLowerCase()} y de detalle: ${seleccion.adornos.toLowerCase()}.
     `.replace(/\s+/g, " ");
 
-    // 💰 PRECIO BIEN CALCULADO
-    let precio = preciosBase[seleccion.base] || 4000;
+    // 💰 PRECIO BASADO EN EL NUEVO ESTÁNDAR
+    let precio = (seleccion.tamano === "1000") ? 11000 : 8000;
 
-    if (seleccion.tamano === "1000") {
-        precio += 3500;
-    }
-    if (seleccion.estilo === "Frozen") {
-        precio += 1000;
-    } else if (seleccion.estilo === "Frappé") {
-        precio += 500; // Por el trabajo de picar el hielo
-    }
-
-    if (seleccion.dulzor === "Alto") {
-        precio += 500;
-    }
     const coctelPersonalizado = {
         id: `custom-${Date.now()}`,
         nombre: `🍸 ${nombreCoctel}`,
         precio: precio,
-        tipo: `${seleccion.sabor} | ${seleccion.estilo || "Refrescante"} | ${seleccion.dulzor || "Medio"}`,
+        tipo: `Base: ${seleccion.base} | Mezclador: ${seleccion.mixer} | Toque: ${seleccion.sabor} | Extras: ${seleccion.adornos} | Tamaño: ${seleccion.tamano}cc`,
         cantidad: 1
     };
 
@@ -290,15 +319,20 @@ function cerrarYResetearModal() {
         btnGenerar.classList.remove("d-none");
         resultado.classList.add("d-none");
 
-        // Opcional: Resetear selecciones
-        // seleccion = { base: null, sabor: null, ... };
-        // document.querySelectorAll('.opcion.activa').forEach(o => o.classList.remove('activa'));
+        // Reset completo del Wizard
+        seleccion = { base: null, mixer: null, sabor: null, adornos: null, tamano: null };
+        document.querySelectorAll('.opcion-card.activa').forEach(o => o.classList.remove('activa'));
+        currentStep = 0;
+        updateWizard();
+        updateSummary();
     }, 500); // Esperar a que el modal se oculte visualmente
 }
 
 // MODAL EVENTOS
 document.getElementById("abrir-modal").onclick = () => {
     document.getElementById("modal-coctel").classList.remove("d-none");
+    updateWizard();
+    updateSummary();
 }
 
 document.getElementById("cerrar-modal").onclick = cerrarYResetearModal;

@@ -5,37 +5,35 @@
 
 {% block content %}
 
-<!-- HERO -->
-<section class="hero-coctel">
+<!-- HERO SECTION -->
+<main class="hero-coctel">
+    <!-- Luces de fondo (Glass & Glow) -->
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
     <div class="hero-content">
-        <h1>🍸 Diseña tu Cóctel Perfecto</h1>
-        <p>Combina sabores, crea algo único y agrégalo a tu pedido</p>
-
-        <button id="abrir-modal" class="btn-hero">
-            Crear ahora
-        </button>
-    </div>
-</section>
-
-<!-- FEATURES -->
-<section class="features-coctel">
-
-    <div class="feature-card">
-        <h3>🥃 Elige tu base</h3>
-        <p>Ron, Pisco, Cachaça</p>
+        <span class="badge-beta">🚀 EXPERIENCIA OMNIA</span>
+        <h1 class="gradient-title">Crea tu Obra Maestra</h1>
+        <p class="hero-subtitle">Mezcla licores, mixers y toques de autor para armar el cóctel de tus sueños</p>
+        <button id="abrir-modal" class="btn-hero pulse-btn">✨ Iniciar Creación</button>
     </div>
 
-    <div class="feature-card">
-        <h3>🍓 Personaliza sabor</h3>
-        <p>Frutal, cítrico o dulce</p>
-    </div>
-
-    <div class="feature-card">
-        <h3>✨ Resultado único</h3>
-        <p>Tu cóctel hecho a medida</p>
-    </div>
-
-</section>
+    <!-- FEATURES (AHORA FLOTAN DENTRO DEL HERO) -->
+    <section class="features-coctel">
+        <div class="feature-card">
+            <h3>🥃 Base a Tu Medida</h3>
+            <p>Ron, Pisco, Bebidas y Jugos</p>
+        </div>
+        <div class="feature-card">
+            <h3>🍓 Toque Frutal</h3>
+            <p>Añade concentrado o tómalo puro</p>
+        </div>
+        <div class="feature-card">
+            <h3>✨ Detalles de Autor</h3>
+            <p>Borde de sal, menta y más</p>
+        </div>
+    </section>
+</main>
 
 <!-- MODAL -->
 <div id="modal-coctel" class="modal-coctel d-none">
@@ -48,45 +46,89 @@
 
             <h2>🍸 Crea tu Cóctel</h2>
 
-            <div id="form-coctel">
-                <h5>1. Elige tu Base</h5>
-                <div class="opciones" id="base">
-                    <div class="opcion" data-value="Ron">🥃 Ron</div>
-                    <div class="opcion" data-value="Pisco">🍸 Pisco</div>
-                    <div class="opcion" data-value="Cachaza">🌵 Cachaça</div>
+            <div id="form-coctel" class="wizard-container">
+                <div class="wizard-progress">
+                    <div class="progress-bar-fill" id="progress-fill"></div>
+                </div>
+                <div class="step-indicator" id="step-indicator">Paso 1 de 5</div>
+
+                <!-- PASO 1 -->
+                <div class="wizard-step active" id="step-0">
+                    <h5 class="step-title">¿Qué botella abrimos hoy?</h5>
+                    <div class="opciones glass-grid" data-grupo="base">
+                        <div class="opcion-card" data-value="Ron Blanco"><span class="emoji-big">🥃</span><span>Ron
+                                Blanco</span></div>
+                        <div class="opcion-card" data-value="Ron con Coco"><span class="emoji-big">🥥</span><span>Ron
+                                Coco</span></div>
+                        <div class="opcion-card" data-value="Pisco 35°"><span class="emoji-big">🍸</span><span>Pisco
+                                35°</span></div>
+                        <div class="opcion-card" data-value="Cachaça"><span
+                                class="emoji-big">🌵</span><span>Cachaça</span></div>
+                    </div>
                 </div>
 
-                <h5>2. Selecciona el Sabor</h5>
-                <div class="opciones" id="sabor">
-                    <div class="opcion" data-value="Frutal">🍓 Frutal</div>
-                    <div class="opcion" data-value="Cítrico">🍋 Cítrico</div>
-                    <div class="opcion" data-value="Dulce">🍯 Dulce</div>
+                <!-- PASO 2 -->
+                <div class="wizard-step d-none" id="step-1">
+                    <h5 class="step-title">¿Con qué lo mezclamos?</h5>
+                    <div class="opciones glass-grid" data-grupo="mixer">
+                        <div class="opcion-card" data-value="Bebida Cola"><span
+                                class="emoji-big">🥤</span><span>Cola</span></div>
+                        <div class="opcion-card" data-value="Bebida Blanca"><span
+                                class="emoji-big">🥤</span><span>Blanca</span></div>
+                        <div class="opcion-card" data-value="Agua Mineral"><span
+                                class="emoji-big">🌊</span><span>Mineral</span></div>
+                    </div>
                 </div>
 
-                <div id="detalle-sabor" class="detalle-sabor d-none">
-                    <h5>¿Qué ingrediente destaca?</h5>
-                    <select id="ingrediente" class="form-select mb-2"></select>
+                <!-- PASO 3 -->
+                <div class="wizard-step d-none" id="step-2">
+                    <h5 class="step-title">Toque Frutal</h5>
+                    <div class="opciones glass-grid" data-grupo="sabor">
+                        <div class="opcion-card" data-value="Concentrado Piña"><span
+                                class="emoji-big">🍍</span><span>Piña</span></div>
+                        <div class="opcion-card" data-value="Concentrado Frutilla"><span
+                                class="emoji-big">🍓</span><span>Frutilla</span></div>
+                        <div class="opcion-card" data-value="Sin Sabor Extra"><span
+                                class="emoji-big">🚫</span><span>Puro</span></div>
+                    </div>
                 </div>
 
-                <h5>3. ❄️ Estilo de servicio</h5>
-                <div class="opciones grupo" data-grupo="estilo">
-                    <div class="opcion" data-value="En las rocas">❄️ En las rocas</div>
-                    <div class="opcion" data-value="Frappé">🧊 Frappé</div>
-                    <div class="opcion" data-value="Frozen">🥶 Frozen</div>
-                    <div class="opcion" data-value="Refrescante">🍹 Ligero</div>
+                <!-- PASO 4 -->
+                <div class="wizard-step d-none" id="step-3">
+                    <h5 class="step-title">El Toque de Autor</h5>
+                    <div class="opciones glass-grid" data-grupo="adornos">
+                        <div class="opcion-card" data-value="Menta Fresca"><span
+                                class="emoji-big">🌿</span><span>Menta</span></div>
+                        <div class="opcion-card" data-value="Borde de Sal"><span class="emoji-big">🧂</span><span>Borde
+                                Sal</span></div>
+                        <div class="opcion-card" data-value="Borde Azúcar Flor"><span
+                                class="emoji-big">✨</span><span>Azúcar Flor</span></div>
+                        <div class="opcion-card" data-value="Extra Azúcar Rubia"><span
+                                class="emoji-big">🍯</span><span>Azúcar extra</span></div>
+                        <div class="opcion-card" data-value="Sin Adornos"><span
+                                class="emoji-big">🚫</span><span>Clásico</span></div>
+                    </div>
                 </div>
 
-                <h5>4. 🍬 Nivel de dulzor</h5>
-                <div class="opciones grupo" data-grupo="dulzor">
-                    <div class="opcion" data-value="Bajo">🍋 Bajo</div>
-                    <div class="opcion" data-value="Medio">🍯 Medio</div>
-                    <div class="opcion" data-value="Alto">🍭 Alto</div>
+                <!-- PASO 5 -->
+                <div class="wizard-step d-none" id="step-4">
+                    <h5 class="step-title">Selecciona el Tamaño</h5>
+                    <div class="opciones glass-grid" data-grupo="tamano">
+                        <div class="opcion-card" data-value="500"><span class="emoji-big">🥤</span><span>500cc
+                                ($8K)</span></div>
+                        <div class="opcion-card" data-value="1000"><span class="emoji-big">🍹</span><span>1 Litro
+                                ($11K)</span></div>
+                    </div>
                 </div>
 
-                <h5>5. 🥤 Tamaño</h5>
-                <div class="opciones grupo" data-grupo="tamano">
-                    <div class="opcion" data-value="500">🥤 500cc</div>
-                    <div class="opcion" data-value="1000">🍹 1 Litro</div>
+                <div class="live-summary d-none" id="live-summary">
+                    Tu Cóctel: <span id="summary-text" style="color: #f5c542;">Armando...</span>
+                </div>
+
+                <div class="wizard-footer">
+                    <button id="btn-atras" class="btn-nav btn-outline d-none">Atrás</button>
+                    <button id="btn-siguiente" class="btn-nav btn-solid">Siguiente</button>
+                    <button class="btn-generar d-none" id="generar">¡Crear Mi Cóctel! ✨</button>
                 </div>
             </div>
             <div id="mixing-area" class="mixing-area d-none">
@@ -98,9 +140,7 @@
             </div>
 
 
-            <button class="btn-generar" id="generar">
-                ¡Crear Mi Cóctel! ✨
-            </button>
+
 
             <div id="resultado" class="resultado-coctel d-none">
                 <h2 id="nombre"></h2>
