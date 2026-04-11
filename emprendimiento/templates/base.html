@@ -62,12 +62,6 @@
                     <i class="fas fa-chevron-down ms-auto"></i>
                 </button>
 
-                <button id="btn-carrito" class="carrito-fab">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="link-text">Mi Pedido</span>
-                    <span id="carrito-count">0</span>
-                </button>
-
                 <ul class="sidebar-submenu" id="contactMenu">
                     <li>
                         <a href="https://wa.me/56987829955" rel="noopener noreferrer" target="_blank"><i
@@ -87,6 +81,12 @@
         </div>
     </nav>
 
+    <button id="btn-carrito" class="carrito-fab">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="link-text">Mi Pedido</span>
+        <span id="carrito-count">0</span>
+    </button>
+
     <div id="carrito-modal" class="carrito-modal hidden">
         <div class="carrito-content animate__animated animate__fadeInUp">
             <h3><i class="fas fa-cocktail"></i> Tu Pedido</h3>
@@ -103,6 +103,11 @@
                 <input type="text" id="nombreCliente" placeholder="👤 Nombre Completo">
                 <input type="tel" id="telefonoCliente" placeholder="📱 Ej: 9 1234 5678">
                 <input type="text" id="direccionCliente" placeholder="📍 Dirección y Número">
+                <select id="metodoPagoCliente">
+                    <option value="" disabled selected>💳 Selecciona un Método de Pago</option>
+                    <option value="Efectivo">💵 Efectivo</option>
+                    <option value="Transferencia">🏦 Transferencia</option>
+                </select>
             </div>
 
             <button id="btn-whatsapp" class="btn btn-whatsapp">

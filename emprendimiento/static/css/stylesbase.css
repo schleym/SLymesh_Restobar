@@ -169,7 +169,7 @@ body {
   color: var(--text-gray);
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   overflow-x: hidden;
 }
 
@@ -329,6 +329,11 @@ body {
     margin-left: 0 !important;
     width: 100% !important;
     padding: 20px;
+  }
+
+  .carrito-fab {
+    bottom: 80px;
+    /* Ajusta este valor según cuánto quieras subirlo */
   }
 
 }
@@ -499,8 +504,9 @@ body {
   font-weight: 600;
 }
 
-/* Inputs del Formulario */
-.carrito-content input {
+/* Inputs y Select del Formulario */
+.carrito-content input,
+.carrito-content select {
   width: 100%;
   background: var(--secondary-dark);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -509,6 +515,16 @@ body {
   border-radius: 8px;
   color: var(--white);
   transition: border 0.3s;
+  appearance: none;
+}
+
+.carrito-content select {
+  cursor: pointer;
+}
+
+.carrito-content select option {
+  background: var(--primary-dark);
+  color: var(--white);
 }
 
 .carrito-content input:focus {
@@ -633,4 +649,13 @@ body {
   font-weight: 600 !important;
   letter-spacing: 1px !important;
   text-transform: uppercase !important;
+}
+
+/* Corrección de Z-Index para SweetAlert sobre el modal */
+.swal2-container {
+  z-index: 9999 !important;
+}
+
+#carrito-count.bump {
+  transform: scale(1.4);
 }

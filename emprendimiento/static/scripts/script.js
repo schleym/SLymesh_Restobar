@@ -221,6 +221,7 @@ if (btnWhatsapp) {
         const nombre = document.getElementById("nombreCliente")?.value.trim() || "";
         const telefono = document.getElementById("telefonoCliente")?.value.trim() || "";
         const direccion = document.getElementById("direccionCliente")?.value.trim() || "";
+        const metodoPago = document.getElementById("metodoPagoCliente")?.value || "";
 
         // --- VALIDACIONES ESPECÍFICAS ---
 
@@ -260,6 +261,17 @@ if (btnWhatsapp) {
             return;
         }
 
+        // D. Validación del Método de Pago
+        if (!metodoPago) {
+            Swal.fire({
+                ...alertConfig,
+                icon: "error",
+                title: "MÉTODO DE PAGO REQUERIDO",
+                text: "Por favor, selecciona cómo deseas pagar."
+            });
+            return;
+        }
+
         // 2. Si pasa todo, construir mensaje
         if (carrito.length === 0) {
             Swal.fire({ ...alertConfig, icon: "warning", title: "CARRITO VACÍO" });
@@ -271,7 +283,7 @@ if (btnWhatsapp) {
         carrito.forEach(item => {
             const sub = item.precio * item.cantidad;
             totalPedido += sub;
-            productosTexto += `• ${item.nombre} x${item.cantidad} - $${sub}\n`;
+            productosTexto += `• ${item.nombre} ${item.tipo !== 'Normal' ? `(${item.tipo}) ` : ''}x${item.cantidad} - $${sub}\n`;
         });
 
         const mensaje = encodeURIComponent(
@@ -280,10 +292,10 @@ if (btnWhatsapp) {
 👤 *Cliente:* ${nombre}
 📱 *Teléfono:* ${telefono}
 📍 *Dirección:* ${direccion}
+💳 *Pago:* ${metodoPago}
 
 ---
-${productosTexto}
----
+${productosTexto}---
 💰 *TOTAL: $${totalPedido}*`
         );
 
