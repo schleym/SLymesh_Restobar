@@ -1,34 +1,65 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Slymesh - Premium Mocktails {% endblock %}
+
 {% block content %}
+<div class="premium-cocktail-view">
 
-<div class="container">
-    <h1>Premium Mocktails</h1>
-    {% for mocktail in mocktails %}
-    <div class="row-section">
+    <section class="hero-section">
+        <h1 class="hero-title">Mocktails</h1>
+        <p class="hero-subtitle">REFRÉSCATE SIN ALCOHOL</p>
+    </section>
 
-        <div class="image-box">
-            <img src="{{ mocktail.imagen_url }}"
-                 alt="{{ mocktail.nombre_mocktail }}">
+    <div class="menu-container">
+
+        {% for mocktail in mocktails %}
+
+        <div class="cocktail-card {{ mocktail.nombre_mocktail|slugify }}">
+
+            <div class="card-img-wrapper">
+                {% if mocktail.imagen_url %}
+                <img src="{{ mocktail.imagen_url }}" alt="{{ mocktail.nombre_mocktail }}">
+                {% else %}
+                <img src="{% static 'img/default-cocktail.jpg' %}" alt="Mocktail">
+                {% endif %}
+            </div>
+
+            <div class="card-body">
+
+                <div class="card-header-group">
+                    <h3 class="card-title">{{ mocktail.nombre_mocktail }}</h3>
+                    <span class="card-price">${{ mocktail.precio }}</span>
+                </div>
+
+                <p class="card-text">
+                    {{ mocktail.descripcion|default:"Una experiencia refrescante y sin alcohol para cualquier momento del día." }}
+                </p>
+
+                <div class="card-controls" style="flex-direction: column; gap: 10px;">
+                    <select class="size-select" style="width: 100%; border-radius: 8px; padding: 10px; background: var(--secondary-dark); color: var(--white); border: 1px solid rgba(197, 160, 89, 0.4); cursor: pointer; outline: none;">
+                        <option value="500ml" data-precio="5000">Tamaño XL (500ml) - $5.000</option>
+                        <option value="1 Litro" data-precio="7500">La Jarra (1 Litro) - $7.500</option>
+                    </select>
+
+                    <div style="display: flex; gap: 10px; width: 100%;">
+                        <input type="number" class="quantity-input" min="1" value="1" style="width: 70px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); color: white; text-align: center; border-radius: 8px; outline: none;">
+                        <button class="add-to-cart"
+                                style="flex-grow: 1; border-radius: 8px; padding: 10px;"
+                                data-id="mocktail-{{ mocktail.id }}"
+                                data-nombre="{{ mocktail.nombre_mocktail }}"
+                                data-tipo="mocktail">
+                            Añadir al Pedido
+                        </button>
+                    </div>
+                </div>
+
+            </div>
         </div>
-
-        <div class="content-box">
-            <h2>{{ mocktail.nombre_mocktail }}</h2>
-            <p>{{ mocktail.descripcion }}</p>
-
-            <button class="btn-fresh add-to-cart"
-                    data-id="mocktail-{{ mocktail.id }}"
-                    data-nombre="{{ mocktail.nombre_mocktail }}"
-                    data-precio="{{ mocktail.precio }}"
-                    data-tipo="mocktail">
-                Agregar · ${{ mocktail.precio }}
-            </button>
-        </div>
+        {% empty %}
+            <p style="text-align:center; color:white; width:100%;">No hay mocktails disponibles actualmente. ¡Vuelve pronto!</p>
+        {% endfor %}
 
     </div>
-    {% empty %}
-        <p>No hay mocktails disponibles actualmente.</p>
-    {% endfor %}
-
 </div>
-
 {% endblock %}

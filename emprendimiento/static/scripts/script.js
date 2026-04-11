@@ -324,6 +324,14 @@ ${productosTexto}---
             willClose: () => {
                 // Abrir WhatsApp justo al cerrar la alerta
                 window.open(`https://wa.me/56987829955?text=${mensaje}`, "_blank");
+                
+                // 🔥 LIMPIAR CARRITO DESPUÉS DE ENVIAR
+                carrito = [];
+                persistirCarrito();
+                actualizarCarrito();
+                
+                // Cerrar modal del carrito
+                document.getElementById("carrito-modal").classList.add("hidden");
             }
         });
     });
