@@ -339,3 +339,13 @@ ${productosTexto}---
 
 // INIT
 actualizarCarrito();
+
+// ==========================================
+// KEEP-ALIVE (EVITAR QUE EL HOST SE APAGUE)
+// ==========================================
+// Envía un ping ligero al servidor cada 40 segundos
+// para prevenir el apagado automático por inactividad.
+setInterval(() => {
+    fetch(window.location.origin + '/?keepalive=1', { cache: 'no-store' })
+        .catch(err => console.log('Ping falló:', err));
+}, 40000); // 40,000 ms = 40 segundos
