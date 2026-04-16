@@ -98,6 +98,16 @@ if (cerrarCarritoBtn) {
 // AGREGAR PRODUCTOS
 document.addEventListener("click", (e) => {
     const btn = e.target.closest(".add-to-cart");
+    const sizeOpt = e.target.closest(".size-option");
+
+    // Lógica para el selector de tamaños (UI)
+    if (sizeOpt) {
+        const selector = sizeOpt.closest(".size-options");
+        selector.querySelectorAll(".size-option").forEach(opt => opt.classList.remove("active"));
+        sizeOpt.classList.add("active");
+        return;
+    }
+
     if (!btn) return;
 
     const contenedor = btn.closest(".product-card") || btn.closest(".cocktail-card") || btn.closest(".card-controls") || btn.parentElement;
@@ -125,10 +135,15 @@ document.addEventListener("click", (e) => {
     let tipoFinal = btn.dataset.tipo || "Normal";
 
     const sizeSelect = contenedor.querySelector(".size-select");
+    const sizeActive = contenedor.querySelector(".size-option.active");
+
     if (sizeSelect) {
         const option = sizeSelect.options[sizeSelect.selectedIndex];
         precioFinal = parseInt(option.dataset.precio, 10);
         tipoFinal = option.value;
+    } else if (sizeActive) {
+        precioFinal = parseInt(sizeActive.dataset.precio, 10);
+        tipoFinal = sizeActive.dataset.value;
     }
 
     const producto = {

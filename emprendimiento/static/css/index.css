@@ -298,6 +298,114 @@ p {
 }
 
 /* --- BANNER FINAL --- */
+/* --- SECCIÓN DE HORARIOS PREMIUM --- */
+.hours-section {
+  padding: 40px 0;
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+  position: relative;
+  overflow: hidden;
+  z-index: 100;
+}
+
+.hours-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+}
+
+.hours-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.hours-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  padding: 15px 40px;
+  border-radius: 50px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.hours-box:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+  transform: translateY(-2px);
+}
+
+.hours-icon {
+  font-size: 1.8rem;
+  color: var(--accent-gold);
+  filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.5));
+  animation: pulse 2s infinite;
+}
+
+.hours-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin: 0;
+  color: var(--text-white);
+  text-transform: uppercase;
+}
+
+.time-range {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 0 !important; /* Reset margin */
+}
+
+.time {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  background: linear-gradient(45deg, #fff, var(--accent-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.divider {
+  color: var(--accent-gold);
+  font-size: 1.2rem;
+  opacity: 0.6;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+@media (max-width: 768px) {
+  .hours-box {
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    border-radius: 20px;
+  }
+  
+  .hours-title {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+  }
+  
+  .time {
+    font-size: 1.1rem;
+  }
+}
+
 .cta-banner {
   background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&q=80&w=1500');
   background-size: cover;
@@ -326,87 +434,93 @@ p {
 
 /* 1. Tabletas y Laptops pequeñas (iPad, Surface) */
 @media (max-width: 991px) {
-    .carousel-caption {
-        bottom: 25%;
-        padding: 0 5%;
-        text-align: center; /* Centramos para mejor balance visual */
-    }
+  .carousel-caption {
+    bottom: 25%;
+    padding: 0 5%;
+    text-align: center;
+    /* Centramos para mejor balance visual */
+  }
 
-    .tracking-wider {
-        border-left: none;
-        border-bottom: 2px solid var(--accent-gold);
-        padding-left: 0;
-        padding-bottom: 10px;
-        display: inline-block;
-    }
+  .tracking-wider {
+    border-left: none;
+    border-bottom: 2px solid var(--accent-gold);
+    padding-left: 0;
+    padding-bottom: 10px;
+    display: inline-block;
+  }
 
-    .about-img-box {
-        width: 90%;
-        margin: 0 auto 3rem auto;
-    }
+  .about-img-box {
+    width: 90%;
+    margin: 0 auto 3rem auto;
+  }
 }
 
 /* 2. Celulares Estándar (iPhone, Android) */
 @media (max-width: 768px) {
-    /* Prevención de errores de fondo en iOS */
-    .cta-banner {
-        background-attachment: scroll !important; /* El parallax fijo se rompe en móviles */
-        padding: 80px 20px;
-    }
 
-    /* Carrusel Adaptativo */
-    .carousel-item {
-        height: 100dvh; /* Altura dinámica para evitar que la barra de Chrome/Safari tape el contenido */
-    }
+  /* Prevención de errores de fondo en iOS */
+  .cta-banner {
+    background-attachment: scroll !important;
+    /* El parallax fijo se rompe en móviles */
+    padding: 80px 20px;
+  }
 
-    .carousel-caption h2 {
-        font-size: 2.2rem; /* Tamaño legible sin ser gigante */
-        letter-spacing: 1px;
-    }
+  /* Carrusel Adaptativo */
+  .carousel-item {
+    height: 100dvh;
+    /* Altura dinámica para evitar que la barra de Chrome/Safari tape el contenido */
+  }
 
-    .btn-gold {
-        width: 80%; /* Botón prominente pero con aire a los lados */
-        max-width: 280px;
-        padding: 14px 20px;
-        font-size: 0.8rem;
-    }
+  .carousel-caption h2 {
+    font-size: 2.2rem;
+    /* Tamaño legible sin ser gigante */
+    letter-spacing: 1px;
+  }
 
-    /* Cards de Productos en una sola columna */
-    .luxury-card {
-        margin-bottom: 20px;
-    }
+  .btn-gold {
+    width: 80%;
+    /* Botón prominente pero con aire a los lados */
+    max-width: 280px;
+    padding: 14px 20px;
+    font-size: 0.8rem;
+  }
 
-    .card-img-wrapper {
-        height: 200px; /* Reducimos altura de imagen para mostrar más contenido */
-    }
+  /* Cards de Productos en una sola columna */
+  .luxury-card {
+    margin-bottom: 20px;
+  }
 
-    /* Secciones */
-    .section-dark {
-        padding: 50px 15px;
-    }
+  .card-img-wrapper {
+    height: 200px;
+    /* Reducimos altura de imagen para mostrar más contenido */
+  }
 
-    .section-title {
-        font-size: 1.8rem;
-    }
+  /* Secciones */
+  .section-dark {
+    padding: 50px 15px;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
 }
 
 /* 3. Celulares muy pequeños (iPhone SE / Pantallas angostas) */
 @media (max-width: 380px) {
-    .carousel-caption h2 {
-        font-size: 1.8rem;
-    }
+  .carousel-caption h2 {
+    font-size: 1.8rem;
+  }
 
-    .tracking-wider {
-        font-size: 0.7rem;
-        letter-spacing: 2px;
-    }
+  .tracking-wider {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+  }
 
-    .price {
-        font-size: 1.2rem;
-    }
-    
-    .card-body-luxury h4 {
-        font-size: 1.1rem;
-    }
+  .price {
+    font-size: 1.2rem;
+  }
+
+  .card-body-luxury h4 {
+    font-size: 1.1rem;
+  }
 }
-

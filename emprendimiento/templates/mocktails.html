@@ -36,11 +36,24 @@
                     {{ mocktail.descripcion|default:"Una experiencia refrescante y sin alcohol para cualquier momento del día." }}
                 </p>
 
-                <div class="card-controls" style="flex-direction: column; gap: 10px;">
-                    <select class="size-select" style="width: 100%; border-radius: 8px; padding: 10px; background: var(--secondary-dark); color: var(--white); border: 1px solid rgba(197, 160, 89, 0.4); cursor: pointer; outline: none;">
-                        <option value="500ml" data-precio="5000">Tamaño XL (500ml) - $5.000</option>
-                        <option value="1 Litro" data-precio="7500">La Jarra (1 Litro) - $7.500</option>
-                    </select>
+                <div class="card-controls" style="flex-direction: column; gap: 15px;">
+                    <div class="size-selector">
+                        <span class="size-label">Selecciona el tamaño:</span>
+                        <div class="size-options">
+                            <div class="size-option active" data-value="500ml" data-precio="5000">
+                                <i class="fas fa-glass-martini-alt size-icon"></i>
+                                <span class="size-name">Tamaño XL</span>
+                                <span class="size-val">500ml</span>
+                                <span class="size-price">$5.000</span>
+                            </div>
+                            <div class="size-option" data-value="1 Litro" data-precio="7500">
+                                <i class="fas fa-wine-glass size-icon"></i>
+                                <span class="size-name">La Jarra</span>
+                                <span class="size-val">1 L</span>
+                                <span class="size-price">$7.500</span>
+                            </div>
+                        </div>
+                    </div>
 
                     <div style="display: flex; gap: 10px; width: 100%;">
                         <input type="number" class="quantity-input" min="1" value="1" style="width: 70px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); color: white; text-align: center; border-radius: 8px; outline: none;">
